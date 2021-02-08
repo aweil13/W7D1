@@ -3,7 +3,7 @@ class User < ApplicationRecord
     validates :password_digest, presence: true
     validates_length_of :password, minimum: 6
     attr_reader :password
-    after_initialize :ensure_session_token
+    before_validation :ensure_session_token
 
     def self.find_by_credentials(user_name, password)
         user = User.find_by(user_name: user_name)
